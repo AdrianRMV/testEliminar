@@ -3,9 +3,10 @@
     import svelteLogo from './assets/svelte.svg';
     import Counter from './lib/Counter.svelte';
     import Test from './views/test.svelte';
+    import Login from './views/login.svelte';
 
 </script>
-
+<!-- 
 <main>
     <div>
         <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
@@ -32,12 +33,16 @@
     <p class="read-the-docs">
         Click on the Vite and Svelte logos to learn more
     </p>
-</main>
+</main> -->
 
 <Router>
   <div>
     <Route path="/home/:id" let:params>
       <Test id={params.id} />
+    </Route>
+
+    <Route path="/login">
+      <Login/>
     </Route>
   </div>
 </Router>
