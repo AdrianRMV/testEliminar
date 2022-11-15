@@ -34,13 +34,13 @@
     </p>
 </main>
 
-<!-- <Router>
+<Router>
   <div>
     <Route path="/home/:id" let:params>
       <Test id={params.id} />
     </Route>
   </div>
-</Router> -->
+</Router>
 
 <style>
     .logo {
