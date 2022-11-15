@@ -1,5 +1,43 @@
+<script>
+    import { fade } from 'svelte/transition';
+    import { get } from 'svelte/store';
+    import { preferences } from '../store/session';
 
+    // Trae datos globales y los setea en "0" para que cada que el usuario este en login su session expire
+    get(preferences);
+    preferences.set(0);
 
+    // Preguntar si existe contenido en el LocalStorage (sesion guardada ahi) y direccionar a /home, si no que ignore solamente
+    import axios from 'axios';
+
+    let dataUsuario = {
+        email: '',
+        password: '',
+    };
+    function login() {
+        let bodyForm = new FormData();
+        bodyForm.append('action', 'access');
+        bodyForm.append('email', dataUsuario.email);
+        bodyForm.append('password', dataUsuario.password);
+
+        axios
+            .post(
+                'https://newphpecommercejona.herokuapp.com/app/AuthController.php',
+                bodyForm
+            )
+            .then(function (response) {
+                if (response.data) {
+                    preferences.set(response.data.data.id);
+                    location.href = '/home'; // Redireccion a home
+                } else {
+                    console.log('Nel');
+                }
+            })
+            .catch((resp) => console.log(resp));
+    }
+</script>
+
+//verificado
 <svelte:head>
     <title>DevEcommerce | Iniciar Sesión</title>
     <!-- ============================================ -->
@@ -34,7 +72,7 @@
     />
 </svelte:head>
 
-<main>
+<main transition:fade>
     <div class="auth-page-wrapper pt-5">
         <!-- auth page bg -->
         <div class="auth-one-bg-position auth-one-bg" id="auth-particles">
@@ -100,6 +138,7 @@
                                             type="email"
                                             class="form-control"
                                             id="useremail"
+                                            bind:value={dataUsuario.email}
                                             placeholder="Ingresa tu correo"
                                             required
                                             name="email"
@@ -123,6 +162,7 @@
                                             <input
                                                 type="password"
                                                 class="form-control pe-5 password-input"
+                                                bind:value={dataUsuario.password}
                                                 placeholder="Ingresa tu contraseña"
                                                 id="password-input"
                                                 name="password"
@@ -143,6 +183,7 @@
                                     <div class="mt-4">
                                         <button
                                             class="btn btn-success w-100"
+                                            on:click={login}
                                         >
                                             Iniciar Sesión
                                         </button>
