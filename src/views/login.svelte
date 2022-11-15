@@ -1,3 +1,4 @@
+//verificado 
 <script>
     import { fade } from 'svelte/transition';
     import { get } from 'svelte/store';
@@ -21,10 +22,7 @@
         bodyForm.append('password', dataUsuario.password);
 
         axios
-            .post(
-                'https://newphpecommercejona.herokuapp.com/app/AuthController.php',
-                bodyForm
-            )
+            .post('https://newphpecommercejona.herokuapp.com/app/AuthController.php', bodyForm)
             .then(function (response) {
                 if (response.data) {
                     preferences.set(response.data.data.id);
@@ -37,7 +35,6 @@
     }
 </script>
 
-//verificado
 <svelte:head>
     <title>DevEcommerce | Iniciar Sesión</title>
     <!-- ============================================ -->
@@ -110,7 +107,9 @@
                                     />
                                 </a>
                             </div>
-                            <p class="mt-3 fs-15 fw-medium">DevStore</p>
+                            <p class="mt-3 fs-15 fw-medium">
+                                DevStore
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -144,11 +143,12 @@
                                             name="email"
                                         />
                                         <div class="invalid-feedback">
-                                            Por favor, ingresa tu Correo.
+                                           Por favor, ingresa tu Correo.
                                         </div>
                                     </div>
 
                                     <div class="mb-3">
+                                       
                                         <label
                                             class="form-label"
                                             for="password-input"
@@ -168,7 +168,7 @@
                                                 name="password"
                                                 required
                                             />
-                                            <!-- <button
+                                                <!-- <button
                                                     class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted shadow-none password-addon"
                                                     type="button"
                                                     id="password-addon"
@@ -230,7 +230,7 @@
                                 </script>
                                 Creado por
                                 <i class="mdi mdi-heart text-danger" />
-                                DevStore
+                               DevStore
                             </p>
                         </div>
                     </div>
