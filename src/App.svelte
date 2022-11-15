@@ -41,9 +41,13 @@
       <Test id={params.id} />
     </Route>
 
-    <Route path="/login">
+    <!-- <Route path="/login">
+      <Login/>
+    </Route> -->
+    <Route path="/">
       <Login/>
     </Route>
+    
   </div>
 </Router>
 
